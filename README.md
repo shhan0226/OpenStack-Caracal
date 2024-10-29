@@ -112,7 +112,7 @@ Installation Script for OpenStack Caracal(2024.1) on Ubuntu 22.04 LTS
     cat <<EOF | sudo tee test.conf
     server $NTP_SERVER iburst  
     EOF
-  ```
+    ```
   - ALLOW_SERVER 설정
     ```
     cat <<EOF | sudo tee -a test.conf  
@@ -123,9 +123,31 @@ Installation Script for OpenStack Caracal(2024.1) on Ubuntu 22.04 LTS
   ```
   service chrony restart
   ```  
+- Verify operation
+  ```
+  chronyc sources
+  ```
   
 ### 4.2. Other Node
 - Install and configure components
   ```
   apt install chrony
+  ```
+- Edit the `/etc/chrony.conf`
+  ```
+  CONTROLLER_SERVER=192.168.1.113  
+  ```
+  - NTP_SERVER 설정
+    ```
+    cat <<EOF | sudo tee test.conf
+    server $CONTROLLER_SERVER iburst  
+    EOF
+    ```
+- Restart the NTP service
+  ```
+  service chrony restart
+  ```  
+- Verify operation
+  ```
+  chronyc sources
   ```
